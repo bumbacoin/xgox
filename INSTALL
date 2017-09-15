@@ -1,0 +1,9 @@
+Building GokuCoin
+
+See doc/readme-qt.rst for instructions on building GokuCoin QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of GokuCoin.
+
+See doc/build-*.txt for instructions on building gokucoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of GokuCoin.
