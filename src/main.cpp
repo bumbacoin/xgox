@@ -1039,12 +1039,12 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
             nSubsidy >>= nSubsidy /100000;  //1000% halving every 100k blocks
             }
 	
-            if(nBestHeight <= 10000)
+            else if(nBestHeight <= 10000)
             {
             nSubsidy = nSubsidy * 5 ;  //5000% until block 10k
             }
 	
-	    if(nBestHeight <= 5000000)
+	    else if(nBestHeight <= 5000000)
             {
             nSubsidy >>= nSubsidy /100000;  //1000% halving every 100k blocks
             }
