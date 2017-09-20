@@ -1008,9 +1008,14 @@ int64_t GetProofOfWorkReward(int64_t nFees)
             nSubsidy = 200000000 * COIN;
             }
 
-            else if(nBestHeight <= 10000)
+            else if(nBestHeight <= 2500)
             {
             nSubsidy = 1 * COIN;
+            }
+
+            else if(nBestHeight <= 10000)
+            {
+            nSubsidy = 50 * COIN;
             }
 
             else if(nBestHeight > 10000)
@@ -1029,7 +1034,17 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
 {
     int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
 
-            if(nBestHeight <= 5000000)
+            if(nBestHeight <= 2500)
+            {
+            nSubsidy >>= nSubsidy /100000;  //1000% halving every 100k blocks
+            }
+	
+            if(nBestHeight <= 10000)
+            {
+            nSubsidy = nSubsidy * 5 ;  //1000% halving every 100k blocks
+            }
+	
+	    if(nBestHeight <= 5000000)
             {
             nSubsidy >>= nSubsidy /100000;  //1000% halving every 100k blocks
             }
