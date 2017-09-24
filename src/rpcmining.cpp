@@ -20,7 +20,13 @@ Value getsubsidy(const Array& params, bool fHelp)
             "getsubsidy [nTarget]\n"
             "Returns proof-of-work subsidy value for the specified value of target.");
 
-    return (uint64_t)GetProofOfWorkReward(0);
+    int nShowHeight;
+    if (params.size() > 0)
+        nShowHeight = atoi(params[0].get_str());
+    else
+        nShowHeight = nBestHeight+1; // block currently being solved
+    
+return (uint64_t)GetProofOfWorkReward(nShowHeight, 0);
 }
 
 Value getmininginfo(const Array& params, bool fHelp)
@@ -43,7 +49,7 @@ Value getmininginfo(const Array& params, bool fHelp)
     diff.push_back(Pair("search-interval",      (int)nLastCoinStakeSearchInterval));
     obj.push_back(Pair("difficulty",    diff));
 
-    obj.push_back(Pair("blockvalue",    (uint64_t)GetProofOfWorkReward(0)));
+    obj.push_back(Pair("blockvalue",    (uint64_t)GetProofOfWorkReward(nBestHeight+1, 0)));
     obj.push_back(Pair("netmhashps",     GetPoWMHashPS()));
     obj.push_back(Pair("netstakeweight", GetPoSKernelPS()));
     obj.push_back(Pair("errors",        GetWarnings("statusbar")));
