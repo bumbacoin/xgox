@@ -1023,7 +1023,7 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 		    nSubsidy >>= nSubsidy /1000000;  // code error :p
             }
 	
-            else if(nBestHeight > 20000)
+            else if(nBestHeight > 14000)
             {
 		    nSubsidy >>= (nHeight / 1000000);  // 100 coins halving every 1 mill blocks
             }
@@ -1049,7 +1049,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
             nSubsidy = nSubsidy * 5 ;  //5000% until block 10k
             }
 	
-	    else if(nBestHeight <= 20000)
+	    else if(nBestHeight <= 14000)
             {
             nSubsidy >>= nSubsidy /100000;  //code error
             }
