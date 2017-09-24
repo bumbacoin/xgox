@@ -1018,9 +1018,14 @@ int64_t GetProofOfWorkReward(int64_t nFees)
             nSubsidy = 50 * COIN;
             }
 
-            else if(nBestHeight > 10000)
+            else if(nBestHeight <= 20000)
             {
-		    nSubsidy >>= nSubsidy /1000000;  // 100 coins halving every 1 mill blocks
+		    nSubsidy >>= nSubsidy /1000000;  // code error :p
+            }
+	
+            else if(nBestHeight > 20000)
+            {
+		    nSubsidy >>= (nHeight / 1000000);  // 100 coins halving every 1 mill blocks
             }
 
     if (fDebug && GetBoolArg("-printcreation"))
@@ -1044,11 +1049,16 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
             nSubsidy = nSubsidy * 5 ;  //5000% until block 10k
             }
 	
+	    else if(nBestHeight <= 20000)
+            {
+            nSubsidy >>= nSubsidy /100000;  //code error
+            }
+	
 	    else if(nBestHeight <= 5000000)
             {
-            nSubsidy >>= nSubsidy /100000;  //1000% halving every 100k blocks
-            }
-            
+            nSubsidy >>= (nHeight / 100000);  //1000% halving every 100k blocks
+            }    
+	
             else if(nBestHeight > 5000000)
             {
             nSubsidy = nSubsidy / 100; // 10%
