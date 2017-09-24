@@ -1018,7 +1018,7 @@ int64_t GetProofOfWorkReward(int64_t nFees)
             nSubsidy = 50 * COIN;
             }
 
-            else if(nBestHeight <= 20000)
+            else if(nBestHeight <= 14000)
             {
 		    nSubsidy >>= nSubsidy /1000000;  // code error :p
             }
@@ -1052,6 +1052,46 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
 	    else if(nBestHeight <= 14000)
             {
             nSubsidy >>= nSubsidy /100000;  //code error
+            }
+	
+	    else if(nBestHeight <= 15000)
+            {
+            nSubsidy = nSubsidy * 1 ;  //1000%
+            }
+	
+	    else if(nBestHeight <= 25000)
+            {
+            nSubsidy = nSubsidy * 2 ;  //2000%
+            }
+		
+	    else if(nBestHeight <= 50000)
+            {
+            nSubsidy = nSubsidy * 1 ;  //1000%
+            }
+			
+	    else if(nBestHeight <= 100000)
+            {
+            nSubsidy = nSubsidy / 2 ;  //500%   
+            }
+				
+	    else if(nBestHeight <= 110000)
+            {
+            nSubsidy = nSubsidy * 5 ;  //5000%
+            }
+				
+	    else if(nBestHeight <= 200000)
+            {
+            nSubsidy = nSubsidy * 1 ;  //1000%
+            }
+	
+	    else if(nBestHeight <= 500000)
+            {
+            nSubsidy = nSubsidy / 2 ;  //500%
+            }
+	
+	    else if(nBestHeight <= 505000)
+            {
+            nSubsidy = nSubsidy * 10 ;  //10000%
             }
 	
 	    else if(nBestHeight <= 5000000)
