@@ -1054,54 +1054,44 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
             nSubsidy >>= nSubsidy /100000;  //code error
             }
 	
-	    else if(nBestHeight <= 15000)
-            {
-            nSubsidy = nSubsidy * 1 ;  //1000%
-            }
-	
 	    else if(nBestHeight <= 25000)
             {
-            nSubsidy = nSubsidy * 2 ;  //2000%
-            }
-		
-	    else if(nBestHeight <= 50000)
-            {
-            nSubsidy = nSubsidy * 1 ;  //1000%
+            nSubsidy = nSubsidy * 5 / 2 ;   //2500%
             }
 			
 	    else if(nBestHeight <= 100000)
             {
-            nSubsidy = nSubsidy / 2 ;  //500%   
+            nSubsidy = nSubsidy * 1 ;  //1000%   
             }
 				
-	    else if(nBestHeight <= 110000)
+	    else if(nBestHeight <= 105000)
             {
             nSubsidy = nSubsidy * 5 ;  //5000%
             }
-				
-	    else if(nBestHeight <= 200000)
+	
+	    else if(nBestHeight <= 150000)
             {
             nSubsidy = nSubsidy * 1 ;  //1000%
             }
 	
-	    else if(nBestHeight <= 500000)
+	    else if(nBestHeight <= 300000)
             {
-            nSubsidy = nSubsidy / 2 ;  //500%
+            nSubsidy = nSubsidy * 2 ;  //2000%
             }
 	
-	    else if(nBestHeight <= 505000)
+	    else if(nBestHeight <= 305000)
             {
-            nSubsidy = nSubsidy * 10 ;  //10000%
+            nSubsidy = nSubsidy * 5 ;  //5000%
+            }
+	
+	    else if(nBestHeight <= 500000)
+            {
+            nSubsidy = nSubsidy * 1 ;  //1000%
             }
 	
 	    else if(nBestHeight <= 5000000)
             {
             nSubsidy >>= (nHeight / 100000);  //1000% halving every 100k blocks
-            }    
-	
-            else if(nBestHeight > 5000000)
-            {
-            nSubsidy = nSubsidy / 100; // 10%
             }
 
     if (fDebug && GetBoolArg("-printcreation"))
