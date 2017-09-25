@@ -30,7 +30,7 @@ class CTxMemPool;
 
 static const int LAST_POW_BLOCK_V1 = 10000;
 static const int POW_RE_ENABLE = 14000;  
-static const int LAST_POW_BLOCK = 9999999999;
+// static const int LAST_POW_BLOCK = 9999999999;
 
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
 static const unsigned int MAX_BLOCK_SIZE = 1000000;
