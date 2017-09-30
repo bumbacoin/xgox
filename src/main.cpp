@@ -1101,8 +1101,10 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
     return nSubsidy + nFees;
 }
 
-static const int64_t nTargetTimespan = 16 * 60;  // 16 mins
+static const int64_t nTargetTimespan_v1 = 16 * 60;  // 16 mins
 static const int64_t nTargetTimespan_v2 = 60 * 60;  // 60 mins
+
+unsigned int nTargetTimespan = nTargetTimespan_v1;
 
 //
 // maximum nBits value could possible be required nTime after
@@ -1197,7 +1199,7 @@ static unsigned int GetNextTargetRequiredV2(const CBlockIndex* pindexLast, bool 
     }
     else
     {
-        nTargetTimespan = nTargetTimespan;
+        nTargetTimespan = nTargetTimespan_v1;
     }	
 	
     CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : bnProofOfWorkLimit;
