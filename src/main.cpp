@@ -41,6 +41,7 @@ CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 CBigNum bnProofOfWorkLimitTestNet(~uint256(0) >> 16);
 
 unsigned int nTargetSpacing = 1 * 60; // 1 minute
+unsigned int nTargetSpacing_v2 = 2 * 60; // 2 minute
 unsigned int nStakeMinAge = 1 * 60 * 60;
 unsigned int nStakeMaxAge = -1; // unlimited
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
@@ -1101,6 +1102,7 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
 }
 
 static const int64_t nTargetTimespan = 16 * 60;  // 16 mins
+static const int64_t nTargetTimespan_v2 = 60 * 60;  // 60 mins
 
 //
 // maximum nBits value could possible be required nTime after
@@ -1180,6 +1182,24 @@ static unsigned int GetNextTargetRequiredV1(const CBlockIndex* pindexLast, bool 
 
 static unsigned int GetNextTargetRequiredV2(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
+    if (pindexBest->nHeight+1 >= 40000)
+    {
+        nTargetSpacing = nTargetSpacing_v2;
+    }
+    else
+    {
+        nTargetSpacing = nTargetSpacing;
+    }
+
+    if (pindexBest->nHeight+1 >= 40000)
+    {
+        nTargetTimespan = nTargetTimespan_v2;
+    }
+    else
+    {
+        nTargetTimespan = nTargetTimespan;
+    }	
+	
     CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : bnProofOfWorkLimit;
 
     if (pindexLast == NULL)
