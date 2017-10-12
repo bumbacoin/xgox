@@ -2970,7 +2970,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
+        if (pfrom->nVersion < (GetAdjustedTime() > FORK_TIME ? MIN_PROTO_VERSION_FORK : MIN_PROTO_VERSION))
         {
             // disconnect from peers older than this proto version
             printf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->nVersion);
@@ -2978,6 +2978,14 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             return false;
         }
 
+        if (pfrom->nVersion < (GetAdjustedTime() > FORK_TIME_2 ? MIN_PROTO_VERSION_FORK_2 : MIN_PROTO_VERSION))
+        {
+            // disconnect from peers older than this proto version
+            printf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->nVersion);
+            pfrom->fDisconnect = true;
+            return false;
+        }
+	    
         if (pfrom->nVersion == 10300)
             pfrom->nVersion = 300;
         if (!vRecv.empty())
@@ -3047,9 +3055,8 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         static int nAskedForBlocks = 0;
         if (!pfrom->fClient && !pfrom->fOneShot &&
             (pfrom->nStartingHeight > (nBestHeight - 144)) &&
-            (pfrom->nVersion < NOBLKS_VERSION_START ||
-             pfrom->nVersion >= NOBLKS_VERSION_END) &&
-             (nAskedForBlocks < 1 || vNodes.size() <= 1))
+            (pfrom->nVersion < NOBLKS_VERSION_START || pfrom->nVersion > (GetAdjustedTime() > FORK_TIME_2 ? NOBLKS_VERSION_END_FORK_2 : NOBLKS_VERSION_END)) &&
+            (nAskedForBlocks < 1 || vNodes.size() <= 1))
         {
             nAskedForBlocks++;
             pfrom->PushGetBlocks(pindexBest, uint256(0));
