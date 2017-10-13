@@ -1,7 +1,7 @@
 src/*.exe
-src/gokucoin
-src/gokucoind
-src/test_gokucoin
+src/gocoin
+src/gocoind
+src/test_gocoin
 src/build.h
 .*.swp
 *.*~*
@@ -10,11 +10,11 @@ src/build.h
 *.orig
 *.o
 *.patch
-.gokucoin
+.gocoin
 #compilation and Qt preprocessor part
 *.qm
 Makefile
-gokucoin-qt
+gocoin-qt
 #resources cpp
 qrc_*.cpp
 #qt creator
