@@ -1067,7 +1067,7 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
             }
 			
 			// following is 100.000 to 150.000 blocks superblock rewards
-	    else if ((nBestHeight <= 105000) || (nBestHeight > 110000 && nBestHeight < 110500) || (nBestHeight > 120000 && nBestHeight < 120500) || (nBestHeight > 130000 && nBestHeight < 130500) || (nBestHeight > 140000 && nBestHeight < 140500))
+	    else if ((nBestHeight > 100000 && nBestHeight <= 105000) || (nBestHeight > 110000 && nBestHeight < 110500) || (nBestHeight > 120000 && nBestHeight < 120500) || (nBestHeight > 130000 && nBestHeight < 130500) || (nBestHeight > 140000 && nBestHeight < 140500))
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
             }
@@ -1091,11 +1091,11 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
 
 		else if (nBestHeight <= 300000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 ;  //10000%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2 ;  //2000%
             }	
             	
 			// following is 300.000 to 400.000 blocks superblock rewards            
-	    else if ((nBestHeight > 300000 && nBestHeight < 300500) || (nBestHeight > 310000 && nBestHeight < 310500) || (nBestHeight > 320000 && nBestHeight < 320500) || (nBestHeight > 330000 && nBestHeight < 330500) || (nBestHeight > 340000 && nBestHeight < 340500) || (nBestHeight > 350000 && nBestHeight < 350500) || (nBestHeight > 360000 && nBestHeight < 360500) || (nBestHeight > 370000 && nBestHeight < 370500) || (nBestHeight > 380000 && nBestHeight < 380500) || (nBestHeight > 390000 && nBestHeight < 390500))
+	    else if ((nBestHeight > 300000 && nBestHeight < 305000) || (nBestHeight > 310000 && nBestHeight < 310500) || (nBestHeight > 320000 && nBestHeight < 320500) || (nBestHeight > 330000 && nBestHeight < 330500) || (nBestHeight > 340000 && nBestHeight < 340500) || (nBestHeight > 350000 && nBestHeight < 350500) || (nBestHeight > 360000 && nBestHeight < 360500) || (nBestHeight > 370000 && nBestHeight < 370500) || (nBestHeight > 380000 && nBestHeight < 380500) || (nBestHeight > 390000 && nBestHeight < 390500))
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
             }
@@ -1108,7 +1108,7 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
             
 		else if (nBestHeight <= 500000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 ;  //10000%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1 ;  //1000%
             }
 
 		else if (nBestHeight <= 600000)
