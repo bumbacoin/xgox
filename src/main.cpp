@@ -1060,14 +1060,10 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 / 2 ;   //2500%
             }
 
+			// following is 70.000 to 100.000 blocks superblock rewards
 	    else if ((nBestHeight > 70000 && nBestHeight < 70500) || (nBestHeight > 80000 && nBestHeight < 80500) || (nBestHeight > 90000 && nBestHeight < 90500))
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
-            }	 
-            			
-	    else if (nBestHeight <= 100000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1 ;  //1000%   
             }
 			
 			// following is 100.000 to 150.000 blocks superblock rewards
@@ -1092,7 +1088,11 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
             }
-	
+
+		else if (nBestHeight <= 300000)
+            {
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 ;  //10000%
+            }	
             	
 			// following is 300.000 to 400.000 blocks superblock rewards            
 	    else if ((nBestHeight > 300000 && nBestHeight < 300500) || (nBestHeight > 310000 && nBestHeight < 310500) || (nBestHeight > 320000 && nBestHeight < 320500) || (nBestHeight > 330000 && nBestHeight < 330500) || (nBestHeight > 340000 && nBestHeight < 340500) || (nBestHeight > 350000 && nBestHeight < 350500) || (nBestHeight > 360000 && nBestHeight < 360500) || (nBestHeight > 370000 && nBestHeight < 370500) || (nBestHeight > 380000 && nBestHeight < 380500) || (nBestHeight > 390000 && nBestHeight < 390500))
@@ -1106,52 +1106,57 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
             }
             
-   else if (nBestHeight <= 500000)
+		else if (nBestHeight <= 500000)
+            {
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 ;  //10000%
+            }
+
+		else if (nBestHeight <= 600000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 ;  //10000%
             }
             
-	    else if (nBestHeight <= 600000)
+	    else if (nBestHeight <= 700000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 2 ;  //5000%
             }
             
-	    else if (nBestHeight <= 700000)
+	    else if (nBestHeight <= 800000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 4 ;  //2500%
             }
             
-	    else if (nBestHeight <= 800000)
+	    else if (nBestHeight <= 900000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 8 ;  //1250%
             }
             
-	    else if (nBestHeight <= 900000)
+	    else if (nBestHeight <= 1000000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 16 ;  //625%
             }
             
-	    else if (nBestHeight <= 1000000)
+	    else if (nBestHeight <= 1100000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 32 ;  //312.5%
             }
 
-	    else if (nBestHeight <= 1100000)
+	    else if (nBestHeight <= 1200000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 64 ;  //~156%
             }
 
-	    else if (nBestHeight <= 1200000)
+	    else if (nBestHeight <= 1300000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 128 ;  //~78%
             }
 
-	    else if (nBestHeight <= 1300000)
+	    else if (nBestHeight <= 1400000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 256 ;  //~39%
             }
 
-	    else if (nBestHeight <= 1400000)
+	    else if (nBestHeight <= 1500000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 512 ;  //~19%
             }
