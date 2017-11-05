@@ -32,8 +32,7 @@ static const int LAST_POW_BLOCK_V1 = 10000;
 static const int POW_RE_ENABLE = 14000;  
 // static const int LAST_POW_BLOCK = 9999999999;
 
-static const unsigned int FORK_TIME = 1508371200; // Thursday, October 19, 2017 12:00:00 AM GMT. Reject v13 clients
-static const unsigned int FORK_TIME_2 = 1508976000; // Thursday, October 26, 2017 12:00:00 AM GMT. Reject all older clients
+static const unsigned int FORK_TIME = 1513036800; // Thursday, December 12, 2017 12:00:00 AM GMT. Reject v17 clients
 
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
 static const unsigned int MAX_BLOCK_SIZE = 1000000;
