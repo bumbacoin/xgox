@@ -1,9 +1,9 @@
-Building GoCoin
+Building xgox
 
-See doc/readme-qt.rst for instructions on building GoCoin QT,
+See doc/readme-qt.rst for instructions on building xgox QT,
 the intended-for-end-users, nice-graphical-interface, reference
-implementation of GoCoin.
+implementation of xgox.
 
-See doc/build-*.txt for instructions on building gocoind,
+See doc/build-*.txt for instructions on building xgoxd,
 the intended-for-services, no-graphical-interface, reference
-implementation of GoCoin.
+implementation of xgox.

@@ -955,7 +955,7 @@ static std::string FormatException(std::exception* pex, const char* pszThread)
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "gocoin";
+    const char* pszModule = "xgox";
 #endif
     if (pex)
         return strprintf(
@@ -985,13 +985,13 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\GoCoin
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\GoCoin
-    // Mac: ~/Library/Application Support/GoCoin
-    // Unix: ~/.gocoin
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\xgox
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\xgox
+    // Mac: ~/Library/Application Support/xgox
+    // Unix: ~/.xgox
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "GoCoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "xgox";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -1003,10 +1003,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     fs::create_directory(pathRet);
-    return pathRet / "GoCoin";
+    return pathRet / "xgox";
 #else
     // Unix
-    return pathRet / ".gocoin";
+    return pathRet / ".xgox";
 #endif
 #endif
 }
@@ -1046,9 +1046,41 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
     return path;
 }
 
+string randomStrGen(int length) {
+    static string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    string result;
+    result.resize(length);
+    for (int32_t i = 0; i < length; i++)
+        result[i] = charset[rand() % charset.length()];
+
+    return result;
+}
+
+void createConf()
+{
+    srand(static_cast<unsigned int>(time(NULL)));
+
+    ofstream pConf;
+#if BOOST_FILESYSTEM_VERSION >= 3
+    pConf.open(GetConfigFile().generic_string().c_str());
+#else
+    pConf.open(GetConfigFile().string().c_str());
+#endif
+    pConf << "rpcuser=user"
+            + randomStrGen(15)
+            + "\nrpcpassword="
+            + randomStrGen(15)
+            + "\n#(0=off, 1=on) staking - turn staking on or off"
+            + "\nstaking=1"
+            + "\n#(0=off, 1=on) irc - join irc channel to find nodes"
+            + "\nirc=1"
+            + "\nrpcallowip=127.0.0.1";
+    pConf.close();
+}
+
 boost::filesystem::path GetConfigFile()
 {
-    boost::filesystem::path pathConfigFile(GetArg("-conf", "gocoin.conf"));
+    boost::filesystem::path pathConfigFile(GetArg("-conf", "xgox.conf"));
     if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir(false) / pathConfigFile;
     return pathConfigFile;
 }
@@ -1058,8 +1090,13 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 {
     boost::filesystem::ifstream streamConfig(GetConfigFile());
     if (!streamConfig.good())
-        return; // No bitcoin.conf file is OK
-
+    {
+        createConf();
+        new(&streamConfig) boost::filesystem::ifstream(GetConfigFile());
+        if(!streamConfig.good())
+            return;
+	}
+	
     set<string> setOptions;
     setOptions.insert("*");
 
@@ -1079,7 +1116,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 
 boost::filesystem::path GetPidFile()
 {
-    boost::filesystem::path pathPidFile(GetArg("-pid", "gocoind.pid"));
+    boost::filesystem::path pathPidFile(GetArg("-pid", "xgoxd.pid"));
     if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
     return pathPidFile;
 }
@@ -1209,10 +1246,10 @@ void AddTimeData(const CNetAddr& ip, int64_t nTime)
                 if (!fMatch)
                 {
                     fDone = true;
-                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong GoCoin will not work properly.");
+                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong xgox will not work properly.");
                     strMiscWarning = strMessage;
                     printf("*** %s\n", strMessage.c_str());
-                    uiInterface.ThreadSafeMessageBox(strMessage+" ", string("GoCoin"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION);
+                    uiInterface.ThreadSafeMessageBox(strMessage+" ", string("xgox"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION);
                 }
             }
         }
