@@ -955,7 +955,7 @@ static std::string FormatException(std::exception* pex, const char* pszThread)
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "gocoin";
+    const char* pszModule = "xgox";
 #endif
     if (pex)
         return strprintf(
@@ -985,13 +985,13 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\GoCoin
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\GoCoin
-    // Mac: ~/Library/Application Support/GoCoin
-    // Unix: ~/.gocoin
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\xgox
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\xgox
+    // Mac: ~/Library/Application Support/xgox
+    // Unix: ~/.xgox
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "GoCoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "xgox";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -1003,10 +1003,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     fs::create_directory(pathRet);
-    return pathRet / "GoCoin";
+    return pathRet / "xgox";
 #else
     // Unix
-    return pathRet / ".gocoin";
+    return pathRet / ".xgox";
 #endif
 #endif
 }
@@ -1048,7 +1048,7 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
 
 boost::filesystem::path GetConfigFile()
 {
-    boost::filesystem::path pathConfigFile(GetArg("-conf", "gocoin.conf"));
+    boost::filesystem::path pathConfigFile(GetArg("-conf", "xgox.conf"));
     if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir(false) / pathConfigFile;
     return pathConfigFile;
 }
@@ -1079,7 +1079,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 
 boost::filesystem::path GetPidFile()
 {
-    boost::filesystem::path pathPidFile(GetArg("-pid", "gocoind.pid"));
+    boost::filesystem::path pathPidFile(GetArg("-pid", "xgoxd.pid"));
     if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
     return pathPidFile;
 }
@@ -1209,10 +1209,10 @@ void AddTimeData(const CNetAddr& ip, int64_t nTime)
                 if (!fMatch)
                 {
                     fDone = true;
-                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong GoCoin will not work properly.");
+                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong xgox will not work properly.");
                     strMiscWarning = strMessage;
                     printf("*** %s\n", strMessage.c_str());
-                    uiInterface.ThreadSafeMessageBox(strMessage+" ", string("GoCoin"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION);
+                    uiInterface.ThreadSafeMessageBox(strMessage+" ", string("xgox"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION);
                 }
             }
         }
