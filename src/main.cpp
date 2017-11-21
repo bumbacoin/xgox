@@ -1025,9 +1025,24 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
 		    nSubsidy >>= nSubsidy /1000000;  // code error :p
             }
 	
-            else if(nBestHeight > 14000)
+            else if(nBestHeight < 125000)
             {
-		    nSubsidy >>= (nHeight / 1000000);  // 100 coins halving every 1 mill blocks
+		    nSubsidy 100 * COIN;  // 
+            }
+	
+            else if(nBestHeight < 150000)
+            {
+		    nSubsidy 50 * COIN;  // 
+            }
+	
+            else if(nBestHeight < 175000)
+            {
+		    nSubsidy 25 * COIN;  // 
+            }
+	
+            else if(nBestHeight < 200000)
+            {
+		    nSubsidy 12.5 * COIN;  // 
             }
 
     if (fDebug && GetBoolArg("-printcreation"))
@@ -2298,7 +2313,7 @@ bool CBlock::AcceptBlock()
     CBlockIndex* pindexPrev = (*mi).second;
     int nHeight = pindexPrev->nHeight+1;
 
-    if (IsProofOfWork() && nHeight > LAST_POW_BLOCK_V1 && nHeight < POW_RE_ENABLE)
+    if (IsProofOfWork() && nHeight > LAST_POW_BLOCK)
         return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
 
     // Check proof-of-work or proof-of-stake
