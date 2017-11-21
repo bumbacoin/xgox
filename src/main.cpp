@@ -1027,22 +1027,22 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
 	
             else if(nBestHeight < 125000)
             {
-		    nSubsidy 100 * COIN;  // 
+		    nSubsidy = 100 * COIN;  // 
             }
 	
             else if(nBestHeight < 150000)
             {
-		    nSubsidy 50 * COIN;  // 
+		    nSubsidy = 50 * COIN;  // 
             }
 	
             else if(nBestHeight < 175000)
             {
-		    nSubsidy 25 * COIN;  // 
+		    nSubsidy = 25 * COIN;  // 
             }
 	
             else if(nBestHeight < 200000)
             {
-		    nSubsidy 12.5 * COIN;  // 
+		    nSubsidy = 12.5 * COIN;  // 
             }
 
     if (fDebug && GetBoolArg("-printcreation"))
