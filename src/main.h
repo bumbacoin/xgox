@@ -28,11 +28,9 @@ class CNode;
 
 class CTxMemPool;
 
-static const int LAST_POW_BLOCK_V1 = 10000;
-static const int POW_RE_ENABLE = 14000;  
-// static const int LAST_POW_BLOCK = 9999999999;
+static const int LAST_POW_BLOCK = 199999;
 
-static const unsigned int FORK_TIME = 1513036800; // Thursday, December 12, 2017 12:00:00 AM GMT. Reject v17 clients
+static const unsigned int FORK_TIME = 1513036800; // Thursday, December 2, 2017 12:00:00 AM GMT. Reject v21 clients 
 
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
 static const unsigned int MAX_BLOCK_SIZE = 1000000;

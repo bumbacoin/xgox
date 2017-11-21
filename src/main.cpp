@@ -41,7 +41,8 @@ CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 CBigNum bnProofOfWorkLimitTestNet(~uint256(0) >> 16);
 
 unsigned int nTargetSpacing = 1 * 60; // 1 minute
-unsigned int nTargetSpacing_v2 = 2 * 60; // 2 minute
+unsigned int nTargetSpacing_v2 = 2 * 60; // 2 minutes
+unsigned int nTargetSpacing_v3 = 5 * 60; // 5 minutes
 unsigned int nStakeMinAge = 1 * 60 * 60;
 unsigned int nStakeMaxAge = -1; // unlimited
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
@@ -1024,9 +1025,24 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
 		    nSubsidy >>= nSubsidy /1000000;  // code error :p
             }
 	
-            else if(nBestHeight > 14000)
+            else if(nBestHeight < 125000)
             {
-		    nSubsidy >>= (nHeight / 1000000);  // 100 coins halving every 1 mill blocks
+		    nSubsidy = 100 * COIN;  // 
+            }
+	
+            else if(nBestHeight < 150000)
+            {
+		    nSubsidy = 50 * COIN;  // 
+            }
+	
+            else if(nBestHeight < 175000)
+            {
+		    nSubsidy = 25 * COIN;  // 
+            }
+	
+            else if(nBestHeight < 200000)
+            {
+		    nSubsidy = 12.5 * COIN;  // 
             }
 
     if (fDebug && GetBoolArg("-printcreation"))
@@ -1067,7 +1083,7 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
             }
 			
 			// following is 100.000 to 150.000 blocks superblock rewards
-	    else if ((nBestHeight > 100000 && nBestHeight <= 105000) || (nBestHeight > 110000 && nBestHeight < 110500) || (nBestHeight > 120000 && nBestHeight < 120500) || (nBestHeight > 130000 && nBestHeight < 130500) || (nBestHeight > 140000 && nBestHeight < 140500))
+	    else if ((nBestHeight > 100000 && nBestHeight <= 105000) || (nBestHeight > 110000 && nBestHeight < 110500))
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
             }
@@ -1077,95 +1093,30 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1 ;  //1000%
             }
 
-			// following is 150.000 to 200.000 blocks superblock rewards         
-	    else if ((nBestHeight > 150000 && nBestHeight < 150500) || (nBestHeight > 160000 && nBestHeight < 160500) || (nBestHeight > 170000 && nBestHeight < 170500) || (nBestHeight > 180000 && nBestHeight < 180500) || (nBestHeight > 190000 && nBestHeight < 190500))
+		else if (nBestHeight <= 200000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
-            }
-
-			// following is 200.000 to 300.000 blocks superblock rewards            
-	    else if ((nBestHeight > 200000 && nBestHeight < 200500) || (nBestHeight > 210000 && nBestHeight < 210500) || (nBestHeight > 220000 && nBestHeight < 220500) || (nBestHeight > 230000 && nBestHeight < 230500) || (nBestHeight > 240000 && nBestHeight < 240500) || (nBestHeight > 250000 && nBestHeight < 250500) || (nBestHeight > 260000 && nBestHeight < 260500) || (nBestHeight > 270000 && nBestHeight < 270500) || (nBestHeight > 280000 && nBestHeight < 280500) || (nBestHeight > 290000 && nBestHeight < 290500))
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
-            }
-
-		else if (nBestHeight <= 300000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 2 ;  //2000%
-            }	
-            	
-			// following is 300.000 to 400.000 blocks superblock rewards            
-	    else if ((nBestHeight > 300000 && nBestHeight < 305000) || (nBestHeight > 310000 && nBestHeight < 310500) || (nBestHeight > 320000 && nBestHeight < 320500) || (nBestHeight > 330000 && nBestHeight < 330500) || (nBestHeight > 340000 && nBestHeight < 340500) || (nBestHeight > 350000 && nBestHeight < 350500) || (nBestHeight > 360000 && nBestHeight < 360500) || (nBestHeight > 370000 && nBestHeight < 370500) || (nBestHeight > 380000 && nBestHeight < 380500) || (nBestHeight > 390000 && nBestHeight < 390500))
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 2 ;  //500%
             }
             
-			// following is 400.000 to 500.000 blocks superblock rewards            
-	    else if ((nBestHeight > 400000 && nBestHeight < 400500) || (nBestHeight > 410000 && nBestHeight < 410500) || (nBestHeight > 420000 && nBestHeight < 420500) || (nBestHeight > 430000 && nBestHeight < 430500) || (nBestHeight > 440000 && nBestHeight < 440500) || (nBestHeight > 450000 && nBestHeight < 450500) || (nBestHeight > 460000 && nBestHeight < 460500) || (nBestHeight > 470000 && nBestHeight < 470500) || (nBestHeight > 480000 && nBestHeight < 480500) || (nBestHeight > 490000 && nBestHeight < 490500))
+	    else if (nBestHeight <= 250000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 4 ;  //250%
             }
             
-		else if (nBestHeight <= 500000)
+	    else if (nBestHeight <= 300000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1 ;  //1000%
-            }
-
-		else if (nBestHeight <= 600000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 ;  //10000%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 8 ;  //125%
             }
             
-	    else if (nBestHeight <= 700000)
+	    else if (nBestHeight <= 350000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 2 ;  //5000%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 16 ;  //62.5%
             }
             
-	    else if (nBestHeight <= 800000)
+	    else if (nBestHeight > 350000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 4 ;  //2500%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 40 ;  //25%
             }
-            
-	    else if (nBestHeight <= 900000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 8 ;  //1250%
-            }
-            
-	    else if (nBestHeight <= 1000000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 16 ;  //625%
-            }
-            
-	    else if (nBestHeight <= 1100000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 32 ;  //312.5%
-            }
-
-	    else if (nBestHeight <= 1200000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 64 ;  //~156%
-            }
-
-	    else if (nBestHeight <= 1300000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 128 ;  //~78%
-            }
-
-	    else if (nBestHeight <= 1400000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 256 ;  //~39%
-            }
-
-	    else if (nBestHeight <= 1500000)
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 512 ;  //~19%
-            }
-
-	    else
-            {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 10 / 1024 ;  // ~9%
-            }
-
 
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
@@ -1259,6 +1210,10 @@ static unsigned int GetNextTargetRequiredV2(const CBlockIndex* pindexLast, bool 
     if (pindexBest->nHeight+1 >= 40000)
     {
         nTargetSpacing = nTargetSpacing_v2;
+    }
+    else if (pindexBest->nHeight+1 >= 119999)
+    {
+        nTargetSpacing = nTargetSpacing_v3;
     }
     else
     {
@@ -2293,7 +2248,7 @@ bool CBlock::AcceptBlock()
     CBlockIndex* pindexPrev = (*mi).second;
     int nHeight = pindexPrev->nHeight+1;
 
-    if (IsProofOfWork() && nHeight > LAST_POW_BLOCK_V1 && nHeight < POW_RE_ENABLE)
+    if (IsProofOfWork() && nHeight > LAST_POW_BLOCK)
         return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
 
     // Check proof-of-work or proof-of-stake
