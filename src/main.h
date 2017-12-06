@@ -30,7 +30,7 @@ class CTxMemPool;
 
 static const int LAST_POW_BLOCK = 199999;
 
-static const unsigned int FORK_TIME = 1513036800; // Thursday, December 12, 2017 00:00:00 AM GMT. Reject v21 clients 
+static const unsigned int FORK_TIME = 1512518400; // Thursday, December 06, 2017 00:00:00 AM GMT. Reject v21 clients 
 
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
 static const unsigned int MAX_BLOCK_SIZE = 1000000;
