@@ -370,7 +370,7 @@ isEmpty(BDB_LIB_PATH) {
 }
 
 isEmpty(BDB_LIB_SUFFIX) {
-    macx:BDB_LIB_SUFFIX = -5.3.a
+    macx:BDB_LIB_SUFFIX = -5.3
 
 }
 
