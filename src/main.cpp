@@ -1100,7 +1100,7 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
 
         else if (nHeight == 202438) //fixed reward due to overflow error in some clients
             {
-            nSubsidy = 2227904.97759893 * COIN ;
+            nSubsidy = 222790497759893 ;
             }
 
         else if (nBestHeight <= 250000)
