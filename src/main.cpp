@@ -1102,26 +1102,26 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
         else if (nBestHeight <= 250000) // change in reward protocol to fix overflow errors in some platforms
             {
             nReward = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 4 ;
-            nSubsidy = nCoinAge * CENT ;  //250%
+            nSubsidy = nReward * CENT ;  //250%
 
             }
 
 	    else if (nBestHeight <= 300000)
             {
             nReward = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 8 ;
-            nSubsidy = nCoinAge * CENT ;  //125%
+            nSubsidy = nReward * CENT ;  //125%
             }
             
 	    else if (nBestHeight <= 350000)
             {
             nReward = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 16 ;
-            nSubsidy = nCoinAge * CENT ;  //62.5%
+            nSubsidy = nReward * CENT ;  //62.5%
             }
             
 	    else if (nBestHeight > 350000)
             {
             nReward = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 40 ;
-            nSubsidy = nCoinAge * CENT ;  //25%
+            nSubsidy = nReward * CENT ;  //25%
             }
 
     if (fDebug && GetBoolArg("-printcreation"))
