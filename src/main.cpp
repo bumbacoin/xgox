@@ -1103,7 +1103,7 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
             nSubsidy = 2227904.97759893 * COIN ;
             }
 
-        else if (nHeight <= 250000)
+        else if (nBestHeight <= 250000)
             {
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 4 ;  //250%
             }
