@@ -1054,8 +1054,7 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
 // miner's coin stake reward based on coin age spent (coin-days)
 int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
 {
-    int64_t nSubsidy = nCoinAge * (COIN_YEAR_REWARD * CENT) * 33 / (365 * 33 + 8);
-    int64_t nReward = 0;
+    int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
 
             if(nBestHeight <= 2500)
             {
@@ -1064,7 +1063,7 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
 	
             else if (nBestHeight <= 10000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * CENT * 33 / (365 * 33 + 8) * 5 ;  //5000% until block 10k
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000% until block 10k
             }
 	
 	    else if (nBestHeight <= 14000)
@@ -1074,54 +1073,54 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
 	
 	    else if (nBestHeight <= 25000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * CENT * 33 / (365 * 33 + 8) * 5 / 2 ;   //2500%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 / 2 ;   //2500%
             }
 
 			// following is 70.000 to 100.000 blocks superblock rewards
 	    else if ((nBestHeight > 70000 && nBestHeight < 70500) || (nBestHeight > 80000 && nBestHeight < 80500) || (nBestHeight > 90000 && nBestHeight < 90500))
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * CENT * 33 / (365 * 33 + 8) * 5 ;  //5000%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
             }
 			
 			// following is 100.000 to 150.000 blocks superblock rewards
 	    else if ((nBestHeight > 100000 && nBestHeight <= 105000) || (nBestHeight > 110000 && nBestHeight < 110500))
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * CENT * 33 / (365 * 33 + 8) * 5 ;  //5000%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 5 ;  //5000%
             }
 	
 	    else if (nBestHeight <= 150000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * CENT * 33 / (365 * 33 + 8) * 1 ;  //1000%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) * 1 ;  //1000%
             }
 
-		else if (nBestHeight <= 200000)
+        else if (nBestHeight <= 200000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * CENT * 33 / (365 * 33 + 8) / 2 ;  //500%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 222 ;  //500%
             }
 
-        else if (nBestHeight <= 250000) // change in reward protocol to fix overflow errors in some platforms
+        else if (nHeight == 202438) //fixed reward due to overflow error in some clients
             {
-            nReward = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 4 ;
-            nSubsidy = nCoinAge * CENT ;  //250%
-
+            nSubsidy = 2227904.97759893 * COIN ;
             }
 
+        else if (nHeight <= 250000)
+            {
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 4 ;  //250%
+            }
+            
 	    else if (nBestHeight <= 300000)
             {
-            nReward = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 8 ;
-            nSubsidy = nCoinAge * CENT ;  //125%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 8 ;  //125%
             }
             
 	    else if (nBestHeight <= 350000)
             {
-            nReward = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 16 ;
-            nSubsidy = nCoinAge * CENT ;  //62.5%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 16 ;  //62.5%
             }
             
 	    else if (nBestHeight > 350000)
             {
-            nReward = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 40 ;
-            nSubsidy = nCoinAge * CENT ;  //25%
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 40 ;  //25%
             }
 
     if (fDebug && GetBoolArg("-printcreation"))

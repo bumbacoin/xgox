@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = xgox-qt
-VERSION = 2.2.2.2
+VERSION = 2.2.2.3
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
