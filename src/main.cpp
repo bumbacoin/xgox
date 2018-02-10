@@ -1055,6 +1055,7 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
 int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
 {
     int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+    CBigNum bnReward = 0;
 
             if(nBestHeight <= 2500)
             {
@@ -1098,29 +1099,24 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 2 ;  //500%
             }
 
-        else if (nHeight == 202438) //fixed reward due to overflow error in some clients
-            {
-            nSubsidy = 222790497759893 ;
-            }
-
         else if (nBestHeight <= 250000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 4 ;  //250%
-            }
+			bnReward = CBigNum(nCoinAge * COIN_YEAR_REWARD) * 33 / (365 * 33 + 8) / 4 ;  250%
+            nSubsidy = bnReward.getuint64();            }
             
 	    else if (nBestHeight <= 300000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 8 ;  //125%
+            nSubsidy = nCoinAge * 125 * 33 / (365 * 33 + 8) * CENT ;  //125%
             }
             
 	    else if (nBestHeight <= 350000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 16 ;  //62.5%
+            nSubsidy = nCoinAge * 62.5 * 33 / (365 * 33 + 8) * CENT ;  //62.5%
             }
             
 	    else if (nBestHeight > 350000)
             {
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8) / 40 ;  //25%
+            nSubsidy = nCoinAge * 25 * 33 / (365 * 33 + 8) * CENT ;  //25%
             }
 
     if (fDebug && GetBoolArg("-printcreation"))
