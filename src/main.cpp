@@ -1101,22 +1101,26 @@ int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees)
 
         else if (nBestHeight <= 250000)
             {
-			bnReward = CBigNum(nCoinAge * COIN_YEAR_REWARD) * 33 / (365 * 33 + 8) / 4 ;  250%
-            nSubsidy = bnReward.getuint64();            }
+			bnReward = CBigNum(nCoinAge * COIN_YEAR_REWARD) * 33 / (365 * 33 + 8) / 4 ;  //250%
+            nSubsidy = bnReward.getuint64();
+            }
             
 	    else if (nBestHeight <= 300000)
             {
-            nSubsidy = nCoinAge * 125 * 33 / (365 * 33 + 8) * CENT ;  //125%
+            bnReward = CBigNum(nCoinAge * COIN_YEAR_REWARD) * 33 / (365 * 33 + 8) / 8 ;  //125%
+            nSubsidy = bnReward.getuint64();            
             }
             
 	    else if (nBestHeight <= 350000)
             {
-            nSubsidy = nCoinAge * 62.5 * 33 / (365 * 33 + 8) * CENT ;  //62.5%
+            bnReward = CBigNum(nCoinAge * COIN_YEAR_REWARD) * 33 / (365 * 33 + 8) / 16 ;  //62.5%
+            nSubsidy = bnReward.getuint64();            
             }
             
 	    else if (nBestHeight > 350000)
             {
-            nSubsidy = nCoinAge * 25 * 33 / (365 * 33 + 8) * CENT ;  //25%
+            bnReward = CBigNum(nCoinAge * COIN_YEAR_REWARD) * 33 / (365 * 33 + 8) / 40 ;  //25%
+            nSubsidy = bnReward.getuint64();            
             }
 
     if (fDebug && GetBoolArg("-printcreation"))
