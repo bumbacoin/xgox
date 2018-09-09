@@ -3,6 +3,10 @@ xgox development tree
 
 xgox is a PoS-based cryptocurrency.
 
+port (default: 23185 or testnet: 33185)
+rpcport (default: 23186 or testnet: 33186)
+
+
 Development process
 ===========================
 
